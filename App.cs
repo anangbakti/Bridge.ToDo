@@ -35,6 +35,25 @@ namespace Bridge.ToDo
             InitFooter();
             InitItemLeft();
             InitButtonClearCompleted();
+            InitRadioButtonQueryItems();    
+        }
+
+        private static void InitRadioButtonQueryItems() {
+            radioButtonQueryItems = new RadioButtonQueryItems("rbShowAll", "rbShowActive", "rbShowCompleted");
+            radioButtonQueryItems.Click += new Action<RadioButtonQueryItems.ShowOptions>(delegate
+            {
+                if (radioButtonQueryItems.Selected == RadioButtonQueryItems.ShowOptions.Active)
+                {
+                    todoItemList.ShowActive();
+                }
+                else if (radioButtonQueryItems.Selected == RadioButtonQueryItems.ShowOptions.Completed)
+                {
+                    todoItemList.ShowCompleted();
+                }
+                else { //show all
+                    todoItemList.ShowAll();
+                }
+            });
         }
 
         private static void InitButtonClearCompleted()
@@ -43,6 +62,7 @@ namespace Bridge.ToDo
             buttonClearCompleted.OnClick += delegate
             {
                 todoItemList.DeleteCompleted();
+                UpdateItemsLeft();                
             };
         }
 
@@ -63,7 +83,7 @@ namespace Bridge.ToDo
             buttonCheckAll.Clicked += delegate (bool checkAll)
             {
                 todoItemList.SetAllComplete(checkAll);
-                SetButtonClearCompletedVisible();               
+                UpdateItemsLeft();               
             };
         }
 
@@ -93,11 +113,7 @@ namespace Bridge.ToDo
             todoItem.DeleteClicked += delegate
             {
                 //Html5.Window.Alert("Delete Clicked");
-                todoItemList.Remove(todoItem);
-                if (todoItemList.IsEmpty())
-                {
-                    footer.Hide();
-                }
+                todoItemList.Remove(todoItem);                
                 UpdateItemsLeft();
             };
 
@@ -115,7 +131,14 @@ namespace Bridge.ToDo
             var jmlItemsLeft = todoItemList.ItemsLeft();
             itemLeft.InnerHTML = jmlItemsLeft.ToString() + " Items left";
             SetButtonClearCompletedVisible();            
-            buttonCheckAll.CheckAll = todoItemList.AllComplete();                
+            buttonCheckAll.CheckAll = todoItemList.AllComplete();
+
+            if (todoItemList.IsEmpty())
+            {
+                buttonCheckAll.CheckAll = false;
+                radioButtonQueryItems.Selected = RadioButtonQueryItems.ShowOptions.All;
+                footer.Hide();
+            }
         }
 
         private static void SetButtonClearCompletedVisible() {

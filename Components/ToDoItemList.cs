@@ -25,8 +25,48 @@ namespace Bridge.ToDo.Components
         }
 
         public void Remove(ToDoItem todoItem) {
-            _todoItemList.Remove(todoItem);
-            _divItemList.RemoveChild(todoItem.DivItem);
+            _todoItemList.Remove(todoItem);            
+
+            if (_divItemList.Contains(todoItem.DivItem)) {
+                _divItemList.RemoveChild(todoItem.DivItem);
+            }            
+        }
+        
+        public void ShowAll() {
+            ClearAllItem();
+            foreach (var item in _todoItemList)
+            {
+                _divItemList.AppendChild(item.DivItem);
+            }
+        }
+
+        public void ShowActive()
+        {
+            ClearAllItem();
+            var active = _todoItemList.Where(e => e.Complete == false).ToList();
+            foreach(var item in active)
+            {
+                _divItemList.AppendChild(item.DivItem);
+            }
+        }
+
+        public void ShowCompleted()
+        {
+            ClearAllItem();
+            var completed = _todoItemList.Where(e => e.Complete == true).ToList();
+            foreach (var item in completed)
+            {
+                _divItemList.AppendChild(item.DivItem);
+            }
+        }
+
+        /// <summary>
+        /// Only clear UI item
+        /// </summary>
+        private void ClearAllItem() {
+            while (_divItemList.FirstChild != null) {
+                _divItemList.RemoveChild(_divItemList.FirstChild);
+            }
         }
 
         public int ItemsLeft() {

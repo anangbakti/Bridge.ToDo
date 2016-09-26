@@ -9,9 +9,9 @@ namespace Bridge.ToDo.Components
 {
     public class RadioButtonQueryItems
     {
-        private HTMLInputElement rbShowAll;
-        private HTMLInputElement rbShowActive;
-        private HTMLInputElement rbShowCompleted;
+        private HTMLLabelElement rbShowAll;
+        private HTMLLabelElement rbShowActive;
+        private HTMLLabelElement rbShowCompleted;
 
         public Action<ShowOptions> Click;
 
@@ -26,23 +26,23 @@ namespace Bridge.ToDo.Components
         public RadioButtonQueryItems(string selectorShowAll,
             string selectorShowActive, string selectorShowCompleted) {
             Selected = ShowOptions.All;
-            rbShowAll = (HTMLInputElement)Document.GetElementById(selectorShowAll);
-            rbShowActive = (HTMLInputElement)Document.GetElementById(selectorShowActive);
-            rbShowCompleted = (HTMLInputElement)Document.GetElementById(selectorShowCompleted);
+            rbShowAll = (HTMLLabelElement)Document.GetElementById(selectorShowAll);
+            rbShowActive = (HTMLLabelElement)Document.GetElementById(selectorShowActive);
+            rbShowCompleted = (HTMLLabelElement)Document.GetElementById(selectorShowCompleted);
 
-            rbShowAll.OnClick += new Action<MouseEvent<HTMLInputElement>>(delegate
+            rbShowAll.OnClick += new Action<MouseEvent<HTMLLabelElement>>(delegate
             {
                 Selected = ShowOptions.All;
                 Click?.Invoke(Selected);
             });
 
-            rbShowActive.OnClick += new Action<MouseEvent<HTMLInputElement>>(delegate
+            rbShowActive.OnClick += new Action<MouseEvent<HTMLLabelElement>>(delegate
             {
                 Selected = ShowOptions.Active;
                 Click?.Invoke(Selected);
             });
 
-            rbShowCompleted.OnClick += new Action<MouseEvent<HTMLInputElement>>(delegate
+            rbShowCompleted.OnClick += new Action<MouseEvent<HTMLLabelElement>>(delegate
             {
                 Selected = ShowOptions.Completed;
                 Click?.Invoke(Selected);
