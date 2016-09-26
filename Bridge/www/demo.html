@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bridge Bridge.ToDo</title>
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .show {
+            display: block !important;
+        }
+
+        .hidden {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+    </style>
+    <script src="../output/bridge.min.js"></script>
+    <script src="../output/Bridge.ToDo.js"></script>
+    <script src="../output/Bridge.ToDo.components.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!--
+        Right-Click on this file and select "View in Browser"
+    -->
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="form-group has-success has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-chevron-down" id="btnCheckAll"></span>
+                        <input type="text" class="form-control" id="inputToDoItem" aria-describedby="inputGroupSuccess1Status">
+                    </div>
+                </div>
+            </div>
+            <div id="todoItemList" class="row">
+            </div>
+
+            <div id="footer" class="row" hidden>
+                <div class="col-md-3" id="itemsLeft"></div>
+                <div class="col-md-6">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input id="rbShowAll" type="radio" name="options"  autocomplete="off" checked>All
+                        </label>
+                        <label class="btn btn-primary">
+                            <input id="rbShowActive" type="radio" name="options"  autocomplete="off">Active
+                        </label>
+                        <label class="btn btn-primary">
+                            <input id="rbShowCompleted" type="radio" name="options"  autocomplete="off">Completed
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3"><input id="btnClearCompleted" class="btn btn-default hidden" type="button" value="Clear Completed"></div>
+                <!--<div class="col-md-3">0 Items left</div>
+                <div class="col-md-6">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked>All
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off">Active
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option3" autocomplete="off">Completed
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>-->
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</body>
+</html>
